@@ -13,6 +13,9 @@ import {
 } from "./ui/form";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
+import axios from "axios";
+import { Loader2 } from "lucide-react";
+import { env } from "@/lib/env";
 
 const formSchema = z.object({
   g: z.number(),
@@ -24,8 +27,13 @@ const formSchema = z.object({
 
 type formSchemaType = z.infer<typeof formSchema>;
 
-const ValuesForm = () => {
-  const [data, setData] = useState<formSchemaType>();
+type ValuesFormProps = {
+  setGraphX: (x: number[]) => void;
+  setGraphY: (y: number[]) => void;
+};
+
+const ValuesForm = ({ setGraphX, setGraphY }: ValuesFormProps) => {
+  const [loading, setLoading] = useState<boolean>(false);
 
   const form = useForm<formSchemaType>({
     resolver: zodResolver(formSchema),
@@ -39,9 +47,23 @@ const ValuesForm = () => {
   });
 
   const onSubmit = async (data: formSchemaType) => {
-    //send data to java backend as post request
-    //get the resulting arrays
-    //send coordinate arrays to the projectile graph
+    try {
+      setLoading(true);
+      //send data to java backend as post request
+      const res = await axios.post(env.backendUrl, data);
+      //get the resulting arrays
+
+      //send coordinate arrays to the projectile graph
+      console.log("RESPONSE_________");
+      const { x, y } = res.data;
+
+      setGraphX(x);
+      setGraphY(y);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -162,7 +184,9 @@ const ValuesForm = () => {
             </FormItem>
           )}
         />
-        <Button type="submit">Submit</Button>
+        <Button type="submit">
+          {loading ? <Loader2 className="animate-spin size-4 " /> : "Submit"}
+        </Button>
       </form>
     </Form>
   );

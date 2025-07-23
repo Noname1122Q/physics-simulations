@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { FaGithub } from "react-icons/fa";
 import Link from "next/link";
+import { HowItWorks } from "@/components/HowItWorks";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -35,8 +36,11 @@ export default function RootLayout({
               Projectile SImulation
             </h2>
           </div>
+          <div>
+            <HowItWorks />
+          </div>
           <div className="flex justify-between items-center">
-            <Link href={"/"}>
+            <Link href={"https://github.com/Noname1122Q/projectile-backend"}>
               <FaGithub className="size-4" />
             </Link>
           </div>

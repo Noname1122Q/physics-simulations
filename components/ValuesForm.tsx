@@ -17,7 +17,6 @@ import axios from "axios";
 import { Loader2 } from "lucide-react";
 import { env } from "@/lib/env";
 
-// 🧠 Accept strings so users can type freely, even clear inputs
 const baseSchema = z.object({
   g: z.string(),
   dragCoeff: z.string(),
@@ -26,7 +25,6 @@ const baseSchema = z.object({
   deltaT: z.string(),
 });
 
-// 🧹 Transform and validate inputs AFTER typing
 const formSchema = baseSchema.superRefine((values, ctx) => {
   const parsed: Partial<Record<keyof typeof values, number>> = {};
 
@@ -111,7 +109,7 @@ const ValuesForm = ({ setGraphX, setGraphY }: ValuesFormProps) => {
       angleDegree: "45.0",
       deltaT: "0.1",
     },
-    mode: "onSubmit", // 🔒 prevents realtime validation
+    mode: "onSubmit",
   });
 
   const onSubmit = async (rawData: RawFormType) => {
@@ -148,6 +146,7 @@ const ValuesForm = ({ setGraphX, setGraphY }: ValuesFormProps) => {
               type="text"
               value={field.value}
               onChange={(e) => field.onChange(e.target.value)}
+              disabled={loading}
             />
           </FormControl>
           <FormMessage />

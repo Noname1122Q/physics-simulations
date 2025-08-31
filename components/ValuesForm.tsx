@@ -15,7 +15,6 @@ import { Input } from "./ui/input";
 import { Button } from "./ui/button";
 import axios from "axios";
 import { Loader2 } from "lucide-react";
-import { env } from "@/lib/env";
 
 const baseSchema = z.object({
   g: z.string(),

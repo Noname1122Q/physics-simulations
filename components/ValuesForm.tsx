@@ -122,7 +122,7 @@ const ValuesForm = ({ setGraphX, setGraphY }: ValuesFormProps) => {
 
     try {
       setLoading(true);
-      const res = await axios.post(process.env.NEXT_PUBLIC_BACKEND_URL!, data);
+      const res = await axios.post("/api/simulate", data);
       const { x, y } = res.data;
       setGraphX(x);
       setGraphY(y);

@@ -1,16 +1,43 @@
 "use client";
-import Projectile from "@/components/Projectile";
-import ValuesForm from "@/components/ValuesForm";
 import { useState } from "react";
+import { SimulationOutput } from "@/types/simulation";
+import ValuesForm from "@/components/ValuesForm";
+import Projectile from "@/components/Projectile";
 
 export default function Home() {
-  const [graphX, setGraphX] = useState<number[]>([]);
-  const [graphY, setGraphY] = useState<number[]>([]);
+  const [result, setResult] = useState<SimulationOutput | null>(null);
 
   return (
-    <div className="w-screen h-screen flex flex-col lg:flex-row items-center justify-center bg-slate-300 overflow-scroll pt-8 md:pt-0">
-      <ValuesForm setGraphX={setGraphX} setGraphY={setGraphY} />
-      <Projectile graphX={graphX} graphY={graphY} />
-    </div>
+    <main className="page-root">
+      <header className="page-header">
+        <div className="header-inner">
+          <div className="logo-mark">
+            <span className="logo-icon">⊛</span>
+          </div>
+          <div>
+            <h1 className="page-title">Projectile Lab</h1>
+            <p className="page-sub">
+              Euler integration · Air resistance · Real-time trajectory
+            </p>
+          </div>
+        </div>
+      </header>
+      <div className="layout">
+        <aside className="sidebar">
+          <ValuesForm setResult={setResult} />
+        </aside>
+        <section className="main-content">
+          {result ? (
+            <Projectile result={result} />
+          ) : (
+            <div className="empty-state">
+              <div className="empty-icon">O</div>
+              <p className="empty-title">Ready to simulate</p>
+              <p className="empty-sub">Configure parameters and hit Launch</p>
+            </div>
+          )}
+        </section>
+      </div>
+    </main>
   );
 }

@@ -73,28 +73,28 @@ const PRESETS: Record<string, Partial<RawFormType>> = {
     dragCoeff: "0.01",
     initial_velocity: "50",
     angleDegree: "45",
-    deltaT: "0.05",
+    deltaT: "0.1",
   },
   Moon: {
     g: "1.62",
     dragCoeff: "0",
     initial_velocity: "50",
     angleDegree: "45",
-    deltaT: "0.05",
+    deltaT: "0.1",
   },
   Mars: {
     g: "3.72",
     dragCoeff: "0.005",
     initial_velocity: "50",
     angleDegree: "45",
-    deltaT: "0.05",
+    deltaT: "0.1",
   },
   Vacuum: {
     g: "9.8",
     dragCoeff: "0",
     initial_velocity: "50",
     angleDegree: "45",
-    deltaT: "0.05",
+    deltaT: "0.1",
   },
 };
 
@@ -246,6 +246,13 @@ const ValuesForm = ({ setResult }: ValuesFormProps) => {
           "Launch simulation"
         )}
       </button>
+      <div className="warn">
+        <p>
+          * The initial simulation may take a little longer because the server
+          needs to start up. Once the server is running, subsequent simulations
+          should complete much faster.
+        </p>
+      </div>
     </form>
   );
 };

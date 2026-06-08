@@ -649,3 +649,24 @@ body {
     grid-template-columns: repeat(2, 1fr);
   }
 }
+
+.warn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  padding: 14px 18px;
+  margin: 1rem 0;
+
+  background: rgba(239, 68, 68, 0.12);
+  border: 1px solid rgba(239, 68, 68, 0.25);
+  border-radius: 14px;
+
+  backdrop-filter: blur(10px);
+
+  color: #fecaca;
+}
+
+.warn p {
+  margin: 0;
+}
